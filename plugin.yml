@@ -1,10 +1,10 @@
-name: BanItem
-author: LDX
-version: 2.3.2-dev
-api: [3.0.0-ALPHA7]
+name: VSPE-ItemBan
+author: Zeao
+version: 1.0.0
+api: [3.0.0-ALPHA6, 3.0.0-ALPHA7]
 main: LDX\BanItem\Main
 load: POSTWORLD
-website: https://github.com/LDX-MCPE/BanItem
+website: §cNot showing due to self-leak information.
 commands:
   banitem:
     description: "BanItem main command."
