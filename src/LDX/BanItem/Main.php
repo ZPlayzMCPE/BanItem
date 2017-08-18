@@ -41,14 +41,14 @@ class Main extends PluginBase implements Listener {
         if ($event->isCancelled()) return;
         $p = $event->getPlayer();
         if($this->isBanned($event->getItem())) {
-            $this->getLogger()->info($p->getName() . " tried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
+            $this->getLogger()->info($p->getName() . " §ctried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
             foreach($this->getServer()->getOnlinePlayers() as $player) {
                 if(isset($this->spys[strtolower($player->getName())])) {
-                    $player->sendMessage($p->getName() . " tried a Banned Item: " . $event->getItem());
+                    $player->sendMessage($p->getName() . " §ctried a Banned Item: " . $event->getItem());
                 }
             }
             if(!($p->hasPermission("banitem") || $p->hasPermission("banitem.*") || $p->hasPermission("banitem.bypass"))) {
-                $p->sendMessage("[BanItem] That item is banned.");
+                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] §cThat item is not allowed.");
                 $event->setCancelled(true);
             }
         }
@@ -58,7 +58,7 @@ class Main extends PluginBase implements Listener {
         if ($event->isCancelled()) return;
         $p = $event->getPlayer();
         if($this->isBanned($event->getItem())) {
-            $this->getLogger()->info($p->getName() . " tried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
+            $this->getLogger()->info($p->getName() . " §ctried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
             foreach($this->getServer()->getOnlinePlayers() as $player) {
                 if(isset($this->spys[strtolower($player->getName())])) {
                     $player->sendMessage($p->getName() . " tried a Banned Item: " . $event->getItem());
@@ -77,11 +77,11 @@ class Main extends PluginBase implements Listener {
             if($this->isBanned($p->getInventory()->getItemInHand())) {
                 foreach($this->getServer()->getOnlinePlayers() as $player) {
                     if(isset($this->spys[strtolower($player->getName())])) {
-                        $player->sendMessage($p->getName() . " tried a Banned Item: " . $event->getItem());
+                        $player->sendMessage($p->getName() . " §ctried a Banned Item: " . $event->getItem());
                     }
                 }
                 if(!($p->hasPermission("banitem") || $p->hasPermission("banitem.*") || $p->hasPermission("banitem.bypass"))) {
-                    $p->sendMessage("[BanItem] That item is banned.");
+                    $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] §cThat item is not allowed.");
                     $event->setCancelled(true);
                 }
             }
@@ -92,14 +92,14 @@ class Main extends PluginBase implements Listener {
         if ($event->isCancelled()) return;
         $p = $event->getPlayer();
         if($this->isBanned($event->getItem())) {
-            $this->getLogger()->info($p->getName() . " tried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
+            $this->getLogger()->info($p->getName() . " §ctried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
             foreach($this->getServer()->getOnlinePlayers() as $player) {
                 if(isset($this->spys[strtolower($player->getName())])) {
-                    $player->sendMessage($p->getName() . " tried a Banned Item: " . $event->getItem());
+                    $player->sendMessage($p->getName() . " §ctried a Banned Item: " . $event->getItem());
                 }
             }
             if(!($p->hasPermission("banitem") || $p->hasPermission("banitem.*") || $p->hasPermission("banitem.bypass"))) {
-                $p->sendMessage("[BanItem] That item is banned.");
+                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] §cThat item is not allowed.");
                 $event->setCancelled(true);
             }
         }
@@ -112,19 +112,19 @@ class Main extends PluginBase implements Listener {
             if($this->isBanned($event->getBow())) {
                 foreach($this->getServer()->getOnlinePlayers() as $player) {
                     if(isset($this->spys[strtolower($player->getName())])) {
-                        $player->sendMessage($p->getName() . " tried a Banned Item: " . $event->getItem());
+                        $player->sendMessage($p->getName() . " §ctried a Banned Item: " . $event->getItem());
                     }
                 }
-                $this->getLogger()->info($p->getName() . " tried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
+                $this->getLogger()->info($p->getName() . " §ctried a Banned Item: " . $event->getItem() . " at " . $this->getPlayerPosition($p));
                 if(!($p->hasPermission("banitem") || $p->hasPermission("banitem.*") || $p->hasPermission("banitem.bypass"))) {
-                    $p->sendMessage("[BanItem] That item is banned.");
+                    $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] §cThat item is not allowed.");
                     $event->setCancelled(true);
                 }
             }
         }
     }
 
-    public function onCommand(CommandSender $p, Command $cmd, string $label, array $args) : bool{
+    public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
         if(!isset($args[0])) {
             return false;
         }
@@ -136,9 +136,9 @@ class Main extends PluginBase implements Listener {
                 $this->spys[strtolower($p->getName())] = strtolower($p->getName());
             }
             if(isset($this->spys[strtolower($p->getName())])) {
-                $p->sendMessage(TEXTFORMAT::GREEN . "You have turned on banitem reports");
+                $p->sendMessage(TEXTFORMAT::GREEN . "§aYou have turned on Item ban reports");
             } else {
-                $p->sendMessage(TEXTFORMAT::GREEN . "You have turned off banitem reports");
+                $p->sendMessage(TEXTFORMAT::GREEN . "§aYou have turned off Item ban reports");
             }
             return true;
         }
@@ -149,7 +149,7 @@ class Main extends PluginBase implements Listener {
 
         $item = explode(":", $args[1]);
         if(!is_numeric($item[0]) || (isset($item[1]) && !is_numeric($item[1]))) {
-            $p->sendMessage("[BanItem] Please only use an item's ID value, and damage if needed.");
+            $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] §cPlease only use an item's ID value, and damage if needed.");
             return true;
         }
         if($args[0] == "ban") {
@@ -158,12 +158,12 @@ class Main extends PluginBase implements Listener {
                 $i = $i . "#" . $item[1];
             }
             if(in_array($i, $this->items)) {
-                $p->sendMessage("[BanItem] That item is already banned.");
+                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] §6That item is already banned.");
             } else {
                 array_push($this->items, $i);
                 $this->saveItems();
-                $p->sendMessage("[BanItem] " . str_replace("#", ":", $i) . " has been banned");
-                $this->getLogger()->info("[BanItem] " . str_replace("#", ":", $i) . " has been banned by " . $p->getName());
+                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] " . str_replace("#", ":", $i) . " has been banned");
+                $this->getLogger()->info("[§6§lVoid§bSkyBlock§cPE§r] " . str_replace("#", ":", $i) . " has been banned by " . $p->getName());
             }
         }
 
@@ -174,11 +174,11 @@ class Main extends PluginBase implements Listener {
                 $i = $i . "#" . $item[1];
             }
             if(!in_array($i, $this->items)) {
-                $p->sendMessage("[BanItem] That item wasn't banned.");
+                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] That item wasn't banned.");
             } else {
                 array_splice($this->items, array_search($i, $this->items), 1);
                 $this->saveItems();
-                $p->sendMessage("[BanItem] " . str_replace("#", ":", $i) . " has been unbanned.");
+                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] " . str_replace("#", ":", $i) . " has been unbanned.");
                 $this->getLogger()->info($p->getName() . " UnBanned Item: " . str_replace("#", ":", $i));
             }
         }
