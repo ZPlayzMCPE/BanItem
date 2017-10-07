@@ -124,9 +124,9 @@ class Main extends PluginBase implements Listener {
         }
     }
 
-    public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
+    public function onCommand(CommandSender $p, Command $cmd, string $label, array $args) : bool {
         if(!isset($args[0])) {
-            return false;
+            return true;
         }
 
         if($args[0] == "report" && $p instanceof Player) {
@@ -158,12 +158,12 @@ class Main extends PluginBase implements Listener {
                 $i = $i . "#" . $item[1];
             }
             if(in_array($i, $this->items)) {
-                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] §6That item is already banned.");
+                $p->sendMessage("[§6§lVoid§bMiner§cPE§r] §6That item is already banned.");
             } else {
                 array_push($this->items, $i);
                 $this->saveItems();
-                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] " . str_replace("#", ":", $i) . " has been banned");
-                $this->getLogger()->info("[§6§lVoid§bSkyBlock§cPE§r] " . str_replace("#", ":", $i) . " has been banned by " . $p->getName());
+                $p->sendMessage("[§6§lVoid§bMiner§cPE§r] " . str_replace("#", ":", $i) . " has been banned");
+                $this->getLogger()->info("[§6§lVoid§bMiner§cPE§r] " . str_replace("#", ":", $i) . " has been banned by " . $p->getName());
             }
         }
 
@@ -174,11 +174,11 @@ class Main extends PluginBase implements Listener {
                 $i = $i . "#" . $item[1];
             }
             if(!in_array($i, $this->items)) {
-                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] That item wasn't banned.");
+                $p->sendMessage("[§6§lVoid§bMiner§cPE§r] That item wasn't banned.");
             } else {
                 array_splice($this->items, array_search($i, $this->items), 1);
                 $this->saveItems();
-                $p->sendMessage("[§6§lVoid§bSkyBlock§cPE§r] " . str_replace("#", ":", $i) . " has been unbanned.");
+                $p->sendMessage("[§6§lVoid§bMiner§cPE§r] " . str_replace("#", ":", $i) . " has been unbanned.");
                 $this->getLogger()->info($p->getName() . " UnBanned Item: " . str_replace("#", ":", $i));
             }
         }
